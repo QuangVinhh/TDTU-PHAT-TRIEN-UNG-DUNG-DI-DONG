@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:layout_gravity="center"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="#e74c3c"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="LIST OF RADIO FOR SELECTION" />
+
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RadioButton
+            android:id="@+id/radioButton_android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Android" />
+
+        <RadioButton
+            android:id="@+id/radioButton_ios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="iOS" />
+
+        <RadioButton
+            android:id="@+id/radioButton_windows"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Windows" />
+
+        <RadioButton
+            android:id="@+id/radioButton_rim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="RIM" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button_click_radio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:backgroundTint="#00b894"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="CLICK HERE TO SEE RESULTS" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="#e74c3c"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="THE FOLLOWING WERE SELECTED" />
+
+
+    <TextView
+        android:id="@+id/textView_radio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="" />
+
+    <Button
+        android:id="@+id/button_checkboxes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:backgroundTint="#00b894"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="SWITCH TO CHECKBOXES" />
+
+</LinearLayout>
