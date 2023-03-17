@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".MainActivity2">
+
+    <ImageButton
+        android:id="@+id/imageView_avatar_2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:backgroundTint="#FFFFFF"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/textView_ava2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="edward_larry" />
+
+    <EditText
+        android:id="@+id/editText_major"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:drawableLeft="@drawable/baseline_work_24"
+        android:drawablePadding="10dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#bdc3c7"
+        android:text="Senior Developer" />
+
+    <EditText
+        android:id="@+id/editText_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:drawableLeft="@drawable/baseline_person_24"
+        android:drawablePadding="10dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#bdc3c7"
+        android:text="Edward Larry" />
+
+    <EditText
+        android:id="@+id/editText_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:drawableLeft="@drawable/baseline_phone_24"
+        android:drawablePadding="10dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#bdc3c7"
+        android:text="(+84) 909123456" />
+
+    <EditText
+        android:id="@+id/editText_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:drawableLeft="@drawable/baseline_email_24"
+        android:drawablePadding="10dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#bdc3c7"
+        android:text="edward_larry@gmail.com" />
+
+    <EditText
+        android:id="@+id/editText_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:drawableLeft="@drawable/baseline_my_location_24"
+        android:drawablePadding="10dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#bdc3c7"
+        android:text="3646 Geneva Street, US" />
+
+    <EditText
+        android:id="@+id/editText_homepage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:drawableLeft="@drawable/baseline_link_24"
+        android:drawablePadding="10dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#bdc3c7"
+        android:text="https://edwardlarry.info" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2ed573"
+        android:drawableLeft="@drawable/baseline_save_alt_24"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:text="SAVE" />
+
+</LinearLayout>
