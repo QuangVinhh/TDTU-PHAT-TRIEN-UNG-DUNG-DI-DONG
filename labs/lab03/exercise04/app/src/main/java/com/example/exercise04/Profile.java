@@ -3,7 +3,7 @@ package com.example.exercise04;
 import android.graphics.Bitmap;
 
 public class Profile {
-    Bitmap avatar;
+    byte[] avatar;
     String name_ava;
     String major;
     String name;
@@ -12,7 +12,7 @@ public class Profile {
     String address;
     String homepage;
 
-    public Profile(Bitmap avatar, String name_ava, String major, String name, String phone, String email, String address, String homepage) {
+    public Profile(byte[] avatar, String name_ava, String major, String name, String phone, String email, String address, String homepage) {
         this.avatar = avatar;
         this.name_ava = name_ava;
         this.major = major;
@@ -23,11 +23,11 @@ public class Profile {
         this.homepage = homepage;
     }
 
-    public Bitmap getAvatar() {
+    public byte[] getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(Bitmap avatar) {
+    public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
 

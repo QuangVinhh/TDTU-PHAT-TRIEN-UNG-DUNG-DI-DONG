@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -13,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.ByteArrayOutputStream;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -45,7 +50,9 @@ public class MainActivity2 extends AppCompatActivity {
         /*---nhận data từ main 1---*/
         Intent intent = getIntent();
 
-        Bitmap get_avatar = (Bitmap) intent.getExtras().get("avatar");
+        byte[] byteArray = getIntent().getByteArrayExtra("avatar");
+        Bitmap get_avatar = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
         String get_textView_ava2 = intent.getStringExtra("name_ava");
         String get_editText_major = intent.getStringExtra("major");
         String get_editText_name = intent.getStringExtra("name");
@@ -55,6 +62,7 @@ public class MainActivity2 extends AppCompatActivity {
         String get_editText_homepage = intent.getStringExtra("homepage");
 
         /*---set lại data khi nhận từ main 1---*/
+//        Drawable new_avatar = new BitmapDrawable(getResources(), get_avatar);
         imageView_avatar_2.setImageBitmap(get_avatar);
         textView_ava2.setText(get_textView_ava2);
         editText_major.setText(get_editText_major);
@@ -80,7 +88,7 @@ public class MainActivity2 extends AppCompatActivity {
 
                 /*---lấy data từ main 2 gửi về main 1---*/
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("avatar", imageView_avatar_2.getDrawingCache());
+//                resultIntent.putExtra("avatar", new_byteArray.toString());
                 resultIntent.putExtra("major", editText_major.getText().toString());
                 resultIntent.putExtra("name", editText_name.getText().toString());
                 resultIntent.putExtra("phone", editText_phone.getText().toString());
@@ -99,5 +107,12 @@ public class MainActivity2 extends AppCompatActivity {
 
         Bitmap image = (Bitmap) data.getExtras().get("data");
         imageView_avatar_2.setImageBitmap(image);
+
+        /*-----Convert to byte array-----*/
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] new_byteArray = stream.toByteArray();
+        /*----------*/
+
     }
 }

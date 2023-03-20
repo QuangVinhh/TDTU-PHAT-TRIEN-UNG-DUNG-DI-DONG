@@ -5,11 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.ByteArrayOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     TextView textView_email;
     TextView textView_address;
     TextView textView_homepage;
+
+    int imageValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +52,15 @@ public class MainActivity extends AppCompatActivity {
         imageButton_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap avatar = imageView_avatar.getDrawingCache();
+
+                Bitmap avatar = ((BitmapDrawable)imageView_avatar.getDrawable()).getBitmap();
+
+                /*-----Convert to byte array-----*/
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                avatar.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                /*----------*/
+
                 String name_ava = textView_ava1.getText().toString();
                 String major = textView_major.getText().toString();
                 String name = textView_name.getText().toString();
@@ -54,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 String homepage = textView_homepage.getText().toString();
 
                 /*---tạo chuyển layout qua main 2---*/
-                profile = new Profile(avatar, name_ava, major, name, phone, email, address, homepage);
+                profile = new Profile(byteArray, name_ava, major, name, phone, email, address, homepage);
                 Intent intent = new Intent(MainActivity.this, MainActivity2.class);
 
                 /*---lấy data từ main 1 sang main 2---*/
@@ -78,8 +94,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+//        byte[] new_byteArray = getIntent().getByteArrayExtra("avatar");
+//        Bitmap get_avatar = BitmapFactory.decodeByteArray(new_byteArray, 0, new_byteArray.length);
+
         /*---lấy data từ main 2 set lại cho main 1---*/
-        Bitmap avatar = (Bitmap) data.getExtras().get("data");
         String name_avatar = data.getStringExtra("name");
         String major = data.getStringExtra("major");
         String name = data.getStringExtra("name");
@@ -88,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         String address = data.getStringExtra("address");
         String homepage = data.getStringExtra("homepage");
 
-        imageView_avatar.setImageBitmap(avatar);
+//        imageView_avatar.setImageBitmap(get_avatar);
         textView_ava1.setText(name_avatar);
         textView_major.setText(major);
         textView_name.setText(name);
