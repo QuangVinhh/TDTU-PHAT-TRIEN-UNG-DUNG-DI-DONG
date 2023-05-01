@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MTVi</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="fragment_home">Hello home fragment</string>
+    <string name="fragment_movies">Hello movies fragment</string>
+    <string name="fragment_kids">Hello kids fragment</string>
+    <string name="fragment_myList">Hello my list fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

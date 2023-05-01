@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#2F3640"
+    android:orientation="vertical"
+    tools:context=".user.MainActivityHome">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Information"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:textColor="#FFF"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_edit"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="@drawable/shape_button_sign_up"
+            android:text="EDIT"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="#FFF"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@drawable/shape_edit_text"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Full name :"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="#2F3640"/>
+
+                <TextView
+                    android:id="@+id/textView_fullname_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:text="admin"
+                    android:textColor="#636E72"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Email :"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="#2F3640"/>
+
+                <TextView
+                    android:id="@+id/textView_email_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:text="admin@gmail.com"
+                    android:textColor="#636E72"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Phone :"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="#2F3640"/>
+
+                <TextView
+                    android:id="@+id/textView_phone_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:text="0909123456"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="#636E72"/>
+            </TableRow>
+
+        </TableLayout>
+
+        <View
+            android:layout_width="340dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:background="#000"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:gravity="center_vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    app:cardCornerRadius="10dp">
+
+                    <ImageView
+                        android:id="@+id/imageView_payment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/ic_launcher_13_foreground" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView_payment_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="15dp"
+                    android:text="0909123456"
+                    android:textColor="#636E72"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
+
+        <View
+            android:layout_width="340dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:background="#000"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_add_new_payment"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_button_sign_up"
+                android:text="ADD NEW PAYMENT"
+                android:textColor="#FFF"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_billing_details"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_button_sign_up"
+                android:text="BILLING DETAILS"
+                android:textColor="#FFF"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Service Details"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:textColor="#FFF"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_change"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="@drawable/shape_button_sign_up"
+            android:text="CHANGE"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="#FFF"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@drawable/shape_edit_text"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/textView_service"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="Standard :"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="#2F3640"/>
+
+                <TextView
+                    android:id="@+id/textView_service_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:text="200.000 VND / month"
+                    android:textColor="#636E72"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_logout"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_button_sign_in"
+        android:text="LOGOUT"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#FFF"/>
+</LinearLayout>

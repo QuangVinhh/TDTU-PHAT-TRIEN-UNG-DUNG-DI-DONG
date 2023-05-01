@@ -1,0 +1,74 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/genres"
+        android:title="Genres"
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/genres_01"
+                android:title="Action"/>
+
+            <item
+                android:id="@+id/genres_02"
+                android:title="Anime"/>
+
+            <item
+                android:id="@+id/genres_03"
+                android:title="Comedies"/>
+
+            <item
+                android:id="@+id/genres_04"
+                android:title="Crime"/>
+
+            <item
+                android:id="@+id/genres_05"
+                android:title="Docuseries"/>
+
+            <item
+                android:id="@+id/genres_06"
+                android:title="Dramas"/>
+
+            <item
+                android:id="@+id/genres_07"
+                android:title="Horror"/>
+
+            <item
+                android:id="@+id/genres_08"
+                android:title="Kids"/>
+
+            <item
+                android:id="@+id/genres_09"
+                android:title="Romance"/>
+
+            <item
+                android:id="@+id/genres_10"
+                android:title="Science"/>
+
+            <item
+                android:id="@+id/genres_11"
+                android:title="Sci-Fi and Fantasy"/>
+
+            <item
+                android:id="@+id/genres_12"
+                android:title="Family"/>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/baseline_search_24"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:title="Search"></item>
+
+    <item
+        android:id="@+id/avatar"
+        android:icon="@mipmap/ic_launcher_11_foreground"
+        android:title="Avatar"
+        app:showAsAction="always"></item>
+
+</menu>
