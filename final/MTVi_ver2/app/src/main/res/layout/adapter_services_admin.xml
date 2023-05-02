@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/FSA_adapter_cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    android:background="#D9D9D9"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/FSA_viewService_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Service name"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="#2F3640"/>
+
+        <TextView
+            android:id="@+id/FSA_viewService_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Service price"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="#636E72"/>
+
+        <TextView
+            android:id="@+id/FSA_viewService_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Service description"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:textColor="#636E72"/>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
