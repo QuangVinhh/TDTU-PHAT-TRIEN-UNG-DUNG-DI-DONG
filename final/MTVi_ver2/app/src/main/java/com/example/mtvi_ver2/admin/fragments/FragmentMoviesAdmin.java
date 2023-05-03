@@ -1,17 +1,22 @@
 package com.example.mtvi_ver2.admin.fragments;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +35,9 @@ import com.example.mtvi_ver2.database.sqlite.MoviesDAO;
 import com.example.mtvi_ver2.database.sqlite.ServicesDAO;
 import com.example.mtvi_ver2.myInterface.InterfaceClickItemMovies;
 import com.example.mtvi_ver2.myInterface.InterfaceClickItemServices;
+import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,7 +63,7 @@ public class FragmentMoviesAdmin extends Fragment {
 
         /*---adapter and recyclerview---*/
         FMA_recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        adapterMoviesAdmin = new AdapterMoviesAdmin(dataMovies, new InterfaceClickItemMovies() {
+        adapterMoviesAdmin = new AdapterMoviesAdmin(getActivity(), dataMovies, new InterfaceClickItemMovies() {
             @Override
             public void onClickItemMovies(DataMovies movies) {
                 showDialogViewMovie(movies);
@@ -97,8 +104,8 @@ public class FragmentMoviesAdmin extends Fragment {
         dialog.show();
 
         /*---find view by id---*/
-        ImageView FMA_addMovie_image = view.findViewById(R.id.FMA_addMovie_image);
         TextView FMA_addMovie_genres = view.findViewById(R.id.FMA_addMovie_genres);
+        EditText FMA_addMovie_image = view.findViewById(R.id.FMA_addMovie_image);
         EditText FMA_addMovie_name = view.findViewById(R.id.FMA_addMovie_name);
         EditText FMA_addMovie_detail = view.findViewById(R.id.FMA_addMovie_detail);
         EditText FMA_addMovie_link = view.findViewById(R.id.FMA_addMovie_link);
@@ -193,7 +200,7 @@ public class FragmentMoviesAdmin extends Fragment {
         FMA_addMovie_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String FMA_addMovie_image_value = "0";
+                String FMA_addMovie_image_value = FMA_addMovie_image.getText().toString();
                 String FMA_addMovie_name_value = FMA_addMovie_name.getText().toString();
                 String FMA_addMovie_genres_value = FMA_addMovie_genres.getText().toString();
                 String FMA_addMovie_detail_value = FMA_addMovie_detail.getText().toString();
@@ -226,6 +233,7 @@ public class FragmentMoviesAdmin extends Fragment {
                 dialog.dismiss();
             }
         });
+
     }
 
     /*=============================================================================================*/
@@ -244,6 +252,7 @@ public class FragmentMoviesAdmin extends Fragment {
         /*---find view by id---*/
         ImageView FMA_editMovie_image = view.findViewById(R.id.FMA_editMovie_image);
         TextView FMA_editMovie_genres = view.findViewById(R.id.FMA_editMovie_genres);
+        EditText FMA_editMovie_imageLink = view.findViewById(R.id.FMA_editMovie_imageLink);
         EditText FMA_editMovie_name = view.findViewById(R.id.FMA_editMovie_name);
         EditText FMA_editMovie_detail = view.findViewById(R.id.FMA_editMovie_detail);
         EditText FMA_editMovie_link = view.findViewById(R.id.FMA_editMovie_link);
@@ -253,7 +262,12 @@ public class FragmentMoviesAdmin extends Fragment {
         Button FMA_editMovie_delete = view.findViewById(R.id.FMA_editMovie_delete);
 
         /*---set data---*/
-        FMA_editMovie_image.setImageResource(Integer.parseInt(movies.getMovie_image()));
+        String movie_image = movies.getMovie_image();
+        Picasso.get()
+                .load(movie_image)
+                .placeholder(R.drawable.baseline_hide_image_24)
+                .into(FMA_editMovie_image);
+        FMA_editMovie_imageLink.setText(movies.getMovie_image());
         FMA_editMovie_name.setText(movies.getMovie_name());
         FMA_editMovie_genres.setText(movies.getMovie_genres());
         FMA_editMovie_detail.setText(movies.getMovie_detail());

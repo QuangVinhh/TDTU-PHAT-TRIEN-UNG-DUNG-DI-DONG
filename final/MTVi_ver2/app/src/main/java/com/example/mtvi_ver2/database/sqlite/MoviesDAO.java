@@ -25,6 +25,7 @@ public class MoviesDAO {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             int movie_id = cursor.getInt(0);
+            /**/
             String movie_image = cursor.getString(1);
             String movie_name = cursor.getString(2);
             String movie_genres = cursor.getString(3);

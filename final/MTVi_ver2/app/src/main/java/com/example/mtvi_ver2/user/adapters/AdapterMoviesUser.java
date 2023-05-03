@@ -1,6 +1,5 @@
-package com.example.mtvi_ver2.admin.adapter;
+package com.example.mtvi_ver2.user.adapters;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -14,10 +13,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mtvi_ver2.R;
+import com.example.mtvi_ver2.admin.adapter.AdapterMoviesAdmin;
 import com.example.mtvi_ver2.database.data.DataMovies;
 import com.example.mtvi_ver2.myInterface.InterfaceClickItemMovies;
 import com.squareup.picasso.Callback;
-import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -25,26 +24,25 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class AdapterMoviesAdmin extends RecyclerView.Adapter<AdapterMoviesAdmin.MoviesAdminViewHolder> {
+public class AdapterMoviesUser extends RecyclerView.Adapter<AdapterMoviesUser.MoviesUserViewHolder> {
+
     ArrayList<DataMovies> mDataMovies;
     InterfaceClickItemMovies interfaceClickItemMovies;
-    Context mContext;
 
-    public AdapterMoviesAdmin(Context mContext, ArrayList<DataMovies> mDataMovies, InterfaceClickItemMovies mListener) {
-        this.mContext = mContext;
+    public AdapterMoviesUser(ArrayList<DataMovies> mDataMovies, InterfaceClickItemMovies mListener) {
         this.mDataMovies = mDataMovies;
         this.interfaceClickItemMovies = mListener;
     }
 
     @NonNull
     @Override
-    public MoviesAdminViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterMoviesUser.MoviesUserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_movies_admin, parent, false);
-        return new MoviesAdminViewHolder(view);
+        return new AdapterMoviesUser.MoviesUserViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MoviesAdminViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterMoviesUser.MoviesUserViewHolder holder, int position) {
         DataMovies movies = mDataMovies.get(position);
 
         /*---false---*/
@@ -75,22 +73,6 @@ public class AdapterMoviesAdmin extends RecyclerView.Adapter<AdapterMoviesAdmin.
             throw new RuntimeException(e);
         }
         holder.FMA_adapter_imageView.setImageBitmap(bmp);
-
-        Log.d(">>>IMAGE : ", movies.getMovie_image());
-//        Picasso.get()
-//                .load(movies.getMovie_image())
-//                .placeholder(R.drawable.baseline_hide_image_24)
-//                .into(holder.FMA_adapter_imageView, new Callback() {
-//                    @Override
-//                    public void onSuccess() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception e) {
-//                        Log.d(">>>ERR : ", e + "");
-//                    }
-//                });
     }
 
     @Override
@@ -101,12 +83,12 @@ public class AdapterMoviesAdmin extends RecyclerView.Adapter<AdapterMoviesAdmin.
         return 0;
     }
 
-    public class MoviesAdminViewHolder extends RecyclerView.ViewHolder {
+    public class MoviesUserViewHolder extends RecyclerView.ViewHolder {
 
         CardView FMA_adapter_cardView;
         ImageView FMA_adapter_imageView;
 
-        public MoviesAdminViewHolder(@NonNull View itemView) {
+        public MoviesUserViewHolder(@NonNull View itemView) {
             super(itemView);
 
             FMA_adapter_cardView = itemView.findViewById(R.id.FMA_adapter_cardView);

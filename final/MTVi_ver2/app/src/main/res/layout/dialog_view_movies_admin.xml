@@ -92,6 +92,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Movie's image URL"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#FFF"/>
+
+            <EditText
+                android:id="@+id/FMA_editMovie_imageLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:background="@drawable/shape_button_edit"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="View movie's image URL"
+                android:textStyle="bold"
+                android:textSize="18dp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
