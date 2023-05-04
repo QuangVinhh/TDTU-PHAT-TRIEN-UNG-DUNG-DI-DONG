@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/avatar"
+        android:icon="@mipmap/ic_launcher_11_foreground"
+        android:title="Avatar"
+        app:showAsAction="always"></item>
+
+</menu>

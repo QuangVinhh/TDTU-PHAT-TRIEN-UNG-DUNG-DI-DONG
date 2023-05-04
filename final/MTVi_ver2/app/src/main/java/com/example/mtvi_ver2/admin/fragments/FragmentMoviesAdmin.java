@@ -1,43 +1,42 @@
 package com.example.mtvi_ver2.admin.fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.SearchManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.mtvi_ver2.R;
 import com.example.mtvi_ver2.admin.adapter.AdapterMoviesAdmin;
-import com.example.mtvi_ver2.admin.adapter.AdapterServicesAdmin;
 import com.example.mtvi_ver2.database.data.DataMovies;
-import com.example.mtvi_ver2.database.data.DataServices;
 import com.example.mtvi_ver2.database.sqlite.MoviesDAO;
-import com.example.mtvi_ver2.database.sqlite.ServicesDAO;
+import com.example.mtvi_ver2.main.MainActivity;
 import com.example.mtvi_ver2.myInterface.InterfaceClickItemMovies;
-import com.example.mtvi_ver2.myInterface.InterfaceClickItemServices;
-import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,6 +48,8 @@ public class FragmentMoviesAdmin extends Fragment {
     AdapterMoviesAdmin adapterMoviesAdmin;
     RecyclerView FMA_recyclerView;
     Button FMA_button_add;
+
+    private SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -263,10 +264,14 @@ public class FragmentMoviesAdmin extends Fragment {
 
         /*---set data---*/
         String movie_image = movies.getMovie_image();
-        Picasso.get()
-                .load(movie_image)
-                .placeholder(R.drawable.baseline_hide_image_24)
+        GlideUrl url = new GlideUrl(movie_image, new LazyHeaders.Builder()
+                .addHeader("User-Agent", WebSettings.getDefaultUserAgent(getActivity()))
+                .build());
+
+        Glide.with(getActivity())
+                .load(url)
                 .into(FMA_editMovie_image);
+
         FMA_editMovie_imageLink.setText(movies.getMovie_image());
         FMA_editMovie_name.setText(movies.getMovie_name());
         FMA_editMovie_genres.setText(movies.getMovie_genres());
@@ -299,7 +304,7 @@ public class FragmentMoviesAdmin extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        movies.setMovie_image("0");
+                        movies.setMovie_image(FMA_editMovie_imageLink.getText().toString());
                         movies.setMovie_name(FMA_editMovie_name.getText().toString());
                         movies.setMovie_genres(FMA_editMovie_genres.getText().toString());
                         movies.setMovie_detail(FMA_editMovie_detail.getText().toString());
@@ -453,5 +458,53 @@ public class FragmentMoviesAdmin extends Fragment {
                 dialogGenres.show();
             }
         });
+    }
+
+    /*=============================================================================================*/
+    /*---method || menu search---*/
+    /*=============================================================================================*/
+
+    @Override
+    public void onCreate(@NonNull Bundle saveInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(saveInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_admin, menu);
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(getActivity().SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapterMoviesAdmin.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapterMoviesAdmin.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                getActivity().finish();
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

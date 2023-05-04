@@ -82,7 +82,9 @@
         android:layout_margin="10dp"
         android:background="#FFF"/>
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -126,12 +128,20 @@
                 android:textStyle="bold"
                 android:textSize="18dp"/>
         </LinearLayout>
+    </ScrollView>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="10dp"
+        android:background="#FFF"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/FMU_editMovie_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="@drawable/shape_button_sign_up"
         android:text="CLOSE"
         android:textColor="#FFF"

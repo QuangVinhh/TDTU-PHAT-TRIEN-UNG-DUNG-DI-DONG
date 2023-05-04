@@ -1,14 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#2F3640"
     tools:context=".user.fragments.FragmentHomeUser">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_button_edit"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/FHU_viewUser_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#636E72"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/FHU_viewUser_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="View name movie"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/FHU_viewUser_play"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_button_sign_in"
+                        android:text="PLAY"
+                        android:textColor="#FFF"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/FHU_viewUser_detail"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_button_sign_up"
+                        android:text="Detail"
+                        android:textColor="#FFF"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Trending now"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#FFF"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/FHU_recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
 
 </FrameLayout>

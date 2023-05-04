@@ -3,6 +3,8 @@ package com.example.mtvi_ver2.admin.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,18 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mtvi_ver2.R;
 import com.example.mtvi_ver2.database.data.DataAccounts;
+import com.example.mtvi_ver2.database.data.DataServices;
 import com.example.mtvi_ver2.myInterface.InterfaceClickItemAccounts;
 
 import java.util.ArrayList;
 
-public class AdapterAccountsAdmin extends RecyclerView.Adapter<AdapterAccountsAdmin.AccountsAdminViewHolder>{
+public class AdapterAccountsAdmin extends RecyclerView.Adapter<AdapterAccountsAdmin.AccountsAdminViewHolder> implements Filterable {
 
     ArrayList<DataAccounts> mDataAccounts;
+    ArrayList<DataAccounts> mDataAccountsOld;
     InterfaceClickItemAccounts interfaceClickItemAccounts;
 
     public AdapterAccountsAdmin(ArrayList<DataAccounts> mDataAccounts, InterfaceClickItemAccounts mListener) {
         this.mDataAccounts = mDataAccounts;
         this.interfaceClickItemAccounts = mListener;
+        this.mDataAccountsOld = mDataAccounts;
     }
 
     @NonNull
@@ -75,6 +80,39 @@ public class AdapterAccountsAdmin extends RecyclerView.Adapter<AdapterAccountsAd
             FAA_viewAccount_check = itemView.findViewById(R.id.FAA_viewAccount_check);
 
         }
+    }
 
+    /*---search---*/
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String strSearch = charSequence.toString();
+                if(strSearch.isEmpty()){
+                    mDataAccounts = mDataAccountsOld;
+                } else {
+                    ArrayList<DataAccounts> listMoviesSearch = new ArrayList<>();
+                    for(DataAccounts accounts : mDataAccountsOld){
+                        if(accounts.getAccount_name().toLowerCase().contains(strSearch.toLowerCase())){
+                            listMoviesSearch.add(accounts);
+                        }
+                    }
+
+                    mDataAccounts = listMoviesSearch;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mDataAccounts;
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                mDataAccounts = (ArrayList<DataAccounts>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }

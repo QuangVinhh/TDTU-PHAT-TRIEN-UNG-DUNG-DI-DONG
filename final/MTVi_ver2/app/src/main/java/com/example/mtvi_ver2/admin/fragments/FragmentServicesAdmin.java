@@ -2,14 +2,21 @@ package com.example.mtvi_ver2.admin.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.SearchManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,6 +26,7 @@ import android.widget.Toast;
 import com.example.mtvi_ver2.R;
 import com.example.mtvi_ver2.admin.adapter.AdapterServicesAdmin;
 import com.example.mtvi_ver2.database.data.DataServices;
+import com.example.mtvi_ver2.main.MainActivity;
 import com.example.mtvi_ver2.myInterface.InterfaceClickItemServices;
 import com.example.mtvi_ver2.database.sqlite.ServicesDAO;
 
@@ -240,5 +248,53 @@ public class FragmentServicesAdmin extends Fragment {
                 dialog.dismiss();
             }
         });
+    }
+
+    /*=============================================================================================*/
+    /*---method || menu search---*/
+    /*=============================================================================================*/
+
+    @Override
+    public void onCreate(@NonNull Bundle saveInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(saveInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_admin_services, menu);
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(getActivity().SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapterServicesAdmin.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapterServicesAdmin.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                getActivity().finish();
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

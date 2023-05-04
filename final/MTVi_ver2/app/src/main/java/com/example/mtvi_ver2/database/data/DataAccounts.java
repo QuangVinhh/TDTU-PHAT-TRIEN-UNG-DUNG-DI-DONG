@@ -1,6 +1,8 @@
 package com.example.mtvi_ver2.database.data;
 
-public class DataAccounts {
+import java.util.ArrayList;
+
+public class DataAccounts extends ArrayList<String> {
     int account_id;
     String account_name;
     String account_email;
@@ -69,4 +71,5 @@ public class DataAccounts {
     public void setAccount_check(String account_check) {
         this.account_check = account_check;
     }
+
 }

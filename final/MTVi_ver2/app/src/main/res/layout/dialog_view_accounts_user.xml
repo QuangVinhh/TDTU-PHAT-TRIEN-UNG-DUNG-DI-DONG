@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#2F3640"
+    android:orientation="vertical"
+    tools:context=".user.fragments.FragmentHomeUser">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="VIEW ACCOUNT"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#FFF"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="10dp"
+        android:background="#FFF"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Information"
+                    android:textStyle="bold"
+                    android:textSize="25dp"
+                    android:textColor="#FFF"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/VAU_button_edit"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_button_sign_up"
+                    android:text="EDIT"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="#FFF"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_button_edit"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="Full name :"
+                            android:textStyle="bold"
+                            android:textSize="20dp"
+                            android:textColor="#2F3640"/>
+
+                        <EditText
+                            android:id="@+id/VAU_editText_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:text="admin"
+                            android:textColor="#636E72"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="Email :"
+                            android:textStyle="bold"
+                            android:textSize="20dp"
+                            android:textColor="#2F3640"/>
+
+                        <TextView
+                            android:id="@+id/VAU_textView_email"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:text="admin@gmail.com"
+                            android:textColor="#636E72"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <View
+                    android:layout_width="350dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center"
+                    android:background="#000"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/VAU_button_changePassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/shape_button_sign_in"
+                        android:text="CHANGE PASSWORD"
+                        android:textColor="#FFF"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Service"
+                    android:textStyle="bold"
+                    android:textSize="25dp"
+                    android:textColor="#FFF"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/VAU_button_changeService"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_button_sign_up"
+                    android:text="CHANGE SERVICE"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:textColor="#FFF"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"/>
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_button_edit">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/VAU_textView_nameService"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="Standard"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="#2F3640"/>
+
+                    <TextView
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=" : "
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:textColor="#2F3640"/>
+
+                    <TextView
+                        android:id="@+id/VAU_textView_priceService"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="200.000 VND / month"
+                        android:textColor="#636E72"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="10dp"
+        android:background="#FFF"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/VAU_button_close"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_button_sign_up"
+            android:text="CLOSE"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="#FFF"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/VAU_button_logout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_button_sign_in"
+            android:text="LOGOUT"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="#FFF"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"/>
+    </LinearLayout>
+
+</LinearLayout>

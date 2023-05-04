@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.mtvi_ver2.user.fragments.FragmentHomeUser;
 import com.example.mtvi_ver2.user.fragments.FragmentMoviesUser;
+import com.example.mtvi_ver2.user.fragments.FragmentServicesUser;
 
 public class AdapterFragmentUser extends FragmentStatePagerAdapter {
 
@@ -23,6 +24,8 @@ public class AdapterFragmentUser extends FragmentStatePagerAdapter {
                 return new FragmentHomeUser();
             case 1:
                 return new FragmentMoviesUser();
+            case 2:
+                return new FragmentServicesUser();
             default:
                 return new FragmentHomeUser();
         }
@@ -30,7 +33,7 @@ public class AdapterFragmentUser extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Nullable
@@ -43,6 +46,9 @@ public class AdapterFragmentUser extends FragmentStatePagerAdapter {
                 break;
             case 1:
                 title = "Moives";
+                break;
+            case 2:
+                title = "Services";
                 break;
         }
         return title;

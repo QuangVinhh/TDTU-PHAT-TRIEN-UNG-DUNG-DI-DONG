@@ -113,7 +113,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
             android:background="@drawable/shape_button_resend"
-            android:text="CANCEL"
+            android:text="CLOSE"
             android:textStyle="bold"
             android:textSize="20dp"
             android:textColor="#7F8FA6"
