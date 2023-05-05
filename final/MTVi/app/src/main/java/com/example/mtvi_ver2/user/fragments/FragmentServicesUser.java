@@ -1,0 +1,357 @@
+package com.example.mtvi_ver2.user.fragments;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.SearchManager;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.mtvi_ver2.R;
+import com.example.mtvi_ver2.admin.adapter.AdapterServicesAdmin;
+import com.example.mtvi_ver2.database.data.DataAccounts;
+import com.example.mtvi_ver2.database.data.DataMovies;
+import com.example.mtvi_ver2.database.data.DataServices;
+import com.example.mtvi_ver2.database.sqlite.AccountsDAO;
+import com.example.mtvi_ver2.database.sqlite.ServicesDAO;
+import com.example.mtvi_ver2.main.MainActivity;
+import com.example.mtvi_ver2.myInterface.InterfaceClickItemServices;
+import com.example.mtvi_ver2.user.adapters.AdapterServicesUser;
+
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
+public class FragmentServicesUser extends Fragment {
+
+    ArrayList<DataServices> dataServices = new ArrayList<>();
+    ArrayList<DataAccounts> dataAccounts = new ArrayList<>();
+
+    ArrayList<DataAccounts> dataAccountsTemp = new ArrayList<>();
+    DataAccounts accounts;
+
+    DataServices services = new DataServices();
+    AdapterServicesUser adapterServicesUser;
+    RecyclerView FSU_recyclerView;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_services_user, container, false);
+        FSU_recyclerView = view.findViewById(R.id.FSU_recyclerView);
+
+        /*---data---*/
+        dataServices = ServicesDAO.readServices(getActivity());
+
+        /*---adapter and recyclerview---*/
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        FSU_recyclerView.setLayoutManager(linearLayoutManager);
+
+        adapterServicesUser = new AdapterServicesUser(dataServices, new InterfaceClickItemServices() {
+            @Override
+            public void onClickItemServices(DataServices services) {
+                showDialogViewService(services);
+            }
+        });
+        FSU_recyclerView.setAdapter(adapterServicesUser);
+
+        return view;
+    }
+
+    /*=============================================================================================*/
+    /*---method || event show service---*/
+    /*=============================================================================================*/
+    private void showDialogViewService(DataServices services) {
+        /*---null---*/
+    }
+
+    /*=============================================================================================*/
+    /*---method || menu search---*/
+    /*=============================================================================================*/
+
+    @Override
+    public void onCreate(@NonNull Bundle saveInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(saveInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_user_home, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.avatar:
+                showViewAccountUser();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /*=============================================================================================*/
+    /*---method || show view account user---*/
+    /*=============================================================================================*/
+
+    private void showViewAccountUser() {
+        AlertDialog.Builder builderViewMovie = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_view_accounts_user, null);
+        builderViewMovie.setView(view);
+        builderViewMovie.setCancelable(false);
+        Dialog dialog = builderViewMovie.create();
+        dialog.show();
+
+        /*---find view by id---*/
+        EditText VAU_editText_name = view.findViewById(R.id.VAU_editText_name);
+        TextView VAU_textView_email = view.findViewById(R.id.VAU_textView_email);
+        TextView VAU_textView_nameService = view.findViewById(R.id.VAU_textView_nameService);
+        TextView VAU_textView_priceService = view.findViewById(R.id.VAU_textView_priceService);
+        Button VAU_button_edit = view.findViewById(R.id.VAU_button_edit);
+        Button VAU_button_changePassword = view.findViewById(R.id.VAU_button_changePassword);
+        Button VAU_button_changeService = view.findViewById(R.id.VAU_button_changeService);
+        Button VAU_button_close = view.findViewById(R.id.VAU_button_close);
+        Button VAU_button_logout = view.findViewById(R.id.VAU_button_logout);
+
+        /*---set data---*/
+        Intent intent = getActivity().getIntent();
+
+        String get_intent_email = intent.getStringExtra("account_email");
+        dataAccountsTemp = AccountsDAO.getAccountByEmail(getActivity(), get_intent_email);
+
+        String name_value = String.valueOf(dataAccountsTemp.get(0).getAccount_name());
+        String password_value = dataAccountsTemp.get(0).getAccount_password();
+        int id_value = dataAccountsTemp.get(0).getAccount_id();
+        String check_value = dataAccountsTemp.get(0).getAccount_check();
+
+        VAU_editText_name.setText(name_value);
+        VAU_textView_email.setText(get_intent_email);
+
+        /*=============================================================================================*/
+        /*---method || event button---*/
+        /*=============================================================================================*/
+
+        /*---event button close---*/
+        VAU_button_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        /*---event button logout---*/
+        VAU_button_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String account_name = VAU_editText_name.getText().toString();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("LOGOUT THIS ACCOUNT");
+                builder.setMessage("Are you sure want to logout, " + "\"" + account_name + "\"" + " ?");
+
+                /*---logout---*/
+                builder.setPositiveButton("LOGOUT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        dialogInterface.dismiss();
+                        getActivity().finish();
+                        startActivity(intent);
+                    }
+                });
+
+                /*---cancel---*/
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.create().show();
+            }
+        });
+
+        /*---event button edit---*/
+        VAU_button_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String account_name = VAU_editText_name.getText().toString();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("EDIT NAME ACCOUNT");
+                builder.setMessage("Are you sure want to edit account's name to " + "\"" + account_name + "\"" + " ?");
+
+                /*---edit---*/
+                builder.setPositiveButton("EDIT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        if(TextUtils.isEmpty(account_name)){
+                            VAU_editText_name.requestFocus();
+                            VAU_editText_name.setError("Please enter your name !");
+                        } else{
+                            VAU_editText_name.setError(null);
+
+                            accounts = new DataAccounts(id_value, account_name, get_intent_email, password_value, check_value);
+
+                            if(AccountsDAO.updateAccounts(getActivity(), accounts)){
+                                Toast.makeText(getActivity(), "UPDATE ACCOUNT SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+                                dataAccounts.clear();
+                                dataAccountsTemp.clear();
+                                dataAccounts.addAll(AccountsDAO.readAccounts(getActivity()));
+                                dataAccountsTemp.addAll(AccountsDAO.readAccounts(getActivity()));
+                                dialog.dismiss();
+                            } else{
+                                Toast.makeText(getActivity(), "UPDATE ACCOUNT FAILED", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+                });
+
+                /*---cancel---*/
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.create().show();
+            }
+        });
+
+        /*---event button change password---*/
+        VAU_button_changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builderViewMovie = new AlertDialog.Builder(getActivity());
+                View viewChangePassword = inflater.inflate(R.layout.dialog_view_change_password, null);
+                builderViewMovie.setView(viewChangePassword);
+                builderViewMovie.setCancelable(false);
+                Dialog dialog = builderViewMovie.create();
+                dialog.show();
+
+                /*---find id---*/
+                EditText FHU_current_password = viewChangePassword.findViewById(R.id.FHU_current_password);
+                EditText FHU_new_password = viewChangePassword.findViewById(R.id.FHU_new_password);
+                CheckBox FHU_show_password = viewChangePassword.findViewById(R.id.FHU_show_password);
+                CheckBox FHU_agree_change = viewChangePassword.findViewById(R.id.FHU_agree_change);
+                Button FHU_changePassword_change = viewChangePassword.findViewById(R.id.FHU_changePassword_change);
+                Button FHU_changePassword_cancel = viewChangePassword.findViewById(R.id.FHU_changePassword_cancel);
+
+                /*------*/
+                FHU_show_password.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if(b) {
+                            FHU_current_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                            FHU_new_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        } else {
+                            FHU_current_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                            FHU_new_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        }
+                    }
+                });
+
+                /*------*/
+                FHU_changePassword_cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                /*------*/
+                FHU_changePassword_change.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String FHU_current_password_value = FHU_current_password.getText().toString();
+                        String FHU_new_password_value = FHU_new_password.getText().toString();
+
+                        if (TextUtils.isEmpty(FHU_current_password_value)) {
+                            FHU_current_password.requestFocus();
+                            FHU_current_password.setError("Please enter your current password !");
+                        } else if (TextUtils.isEmpty(FHU_new_password_value)) {
+                            FHU_new_password.requestFocus();
+                            FHU_new_password.setError("Please enter your new password !");
+                        } else if(!CheckIsValidPassword(FHU_new_password_value)) {
+                            FHU_new_password.requestFocus();
+                            FHU_new_password.setError("Your password much have : \n+ 8 or more characters \n+ Upper and lowercase letters \n+ At least one number \n+ No white spaces");
+                        } else if(FHU_agree_change.isChecked() == false){
+                            FHU_agree_change.requestFocus();
+                            FHU_agree_change.setError("Please confirm our conditions !");
+                        } else if (FHU_current_password_value.equals(password_value)) {
+
+                            accounts = new DataAccounts(id_value, name_value, get_intent_email, FHU_new_password_value, check_value);
+
+                            if(AccountsDAO.updateAccounts(getActivity(), accounts)){
+                                Toast.makeText(getActivity(), "UPDATE ACCOUNT SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+                                dataAccounts.clear();
+                                dataAccountsTemp.clear();
+                                dataAccounts.addAll(AccountsDAO.readAccounts(getActivity()));
+                                dataAccountsTemp.addAll(AccountsDAO.readAccounts(getActivity()));
+                                getActivity().finish();
+                            } else{
+                                Toast.makeText(getActivity(), "UPDATE ACCOUNT FAILED", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            FHU_current_password.requestFocus();
+                            FHU_current_password.setError("Your current password is not correct !");
+
+                            FHU_agree_change.setError(null);
+                            FHU_new_password.setError(null);
+                        }
+                    }
+                });
+
+            }
+        });
+
+        /*---event button service---*/
+
+    }
+
+    /*=============================================================================================*/
+    /*---method || check valid password---*/
+    /*=============================================================================================*/
+
+    private boolean CheckIsValidPassword(String password) {
+        Pattern pattern;
+        Matcher matcher;
+
+        String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+    }
+
+}
